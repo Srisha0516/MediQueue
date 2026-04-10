@@ -19,6 +19,11 @@ const register = async (req, res) => {
 
     if (error) throw error;
 
+    // Automatically create doctor profile if role is doctor
+    if (role === 'doctor') {
+      await supabase.from('doctors').insert([{ user_id: data.id, specialization: 'General' }]);
+    }
+
     res.status(201).json({ message: 'User registered successfully', user: { id: data.id, name: data.name, role: data.role } });
   } catch (err) {
     res.status(500).json({ error: err.message });
