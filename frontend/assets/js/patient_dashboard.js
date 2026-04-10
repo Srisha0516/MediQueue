@@ -77,3 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const btn = document.querySelector('form button');
     if (btn) btn.addEventListener('click', handleBooking);
 });
+
+// Sidebar Mockup Handling
+document.querySelectorAll('aside nav a').forEach(link => { link.addEventListener('click', (e) => { e.preventDefault(); alert('This module will be available in Phase 2 of the MediQueue deployment. Please stick to Dashboard and Queue flows for this demo.'); }); });
