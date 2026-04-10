@@ -21,6 +21,11 @@ const io = new Server(server, {
 app.use(cors());
 app.use(express.json());
 
+// Root Welcome Route
+app.get('/', (req, res) => {
+  res.json({ message: 'MediQueue API is Live and Running!', status: 'Optimal' });
+});
+
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/patient', patientRoutes);
