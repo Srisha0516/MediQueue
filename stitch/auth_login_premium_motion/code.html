@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login | MediQueue Clinical Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed-variant": "#2f2ebe",
+                    "tertiary-fixed": "#e1e0ff",
+                    "surface-variant": "#e0e3e5",
+                    "tertiary": "#3e3fcc",
+                    "primary": "#004ac6",
+                    "surface-container-high": "#e6e8ea",
+                    "on-primary-container": "#eeefff",
+                    "surface-container-highest": "#e0e3e5",
+                    "on-primary": "#ffffff",
+                    "secondary-fixed": "#89f5e7",
+                    "on-secondary-container": "#006f66",
+                    "on-secondary": "#ffffff",
+                    "secondary-container": "#86f2e4",
+                    "tertiary-container": "#585be6",
+                    "on-secondary-fixed-variant": "#005049",
+                    "inverse-on-surface": "#eff1f3",
+                    "surface": "#f7f9fb",
+                    "surface-container-low": "#f2f4f6",
+                    "inverse-primary": "#b4c5ff",
+                    "background": "#f7f9fb",
+                    "inverse-surface": "#2d3133",
+                    "secondary": "#006a61",
+                    "tertiary-fixed-dim": "#c0c1ff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed": "#00201d",
+                    "on-tertiary-fixed": "#07006c",
+                    "outline": "#737686",
+                    "on-error": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "on-error-container": "#93000a",
+                    "on-primary-fixed": "#00174b",
+                    "surface-container": "#eceef0",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "secondary-fixed-dim": "#6bd8cb",
+                    "surface-bright": "#f7f9fb",
+                    "error": "#ba1a1a",
+                    "outline-variant": "#c3c6d7",
+                    "primary-fixed": "#dbe1ff",
+                    "surface-dim": "#d8dadc",
+                    "on-background": "#191c1e",
+                    "on-surface": "#191c1e",
+                    "on-tertiary-container": "#f1eeff",
+                    "surface-tint": "#0053db",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "on-surface-variant": "#434655",
+                    "primary-container": "#2563eb",
+                    "on-tertiary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            },
+            "animation": {
+                'blob': "blob 25s infinite",
+                'float': "float 15s infinite ease-in-out",
+                'fade-in-up': 'fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                'fade-in': 'fadeIn 1.2s ease-out forwards',
+                'shimmer': 'shimmer 3s infinite linear',
+            },
+            "keyframes": {
+                blob: {
+                    "0%": { transform: "translate(0px, 0px) scale(1)" },
+                    "33%": { transform: "translate(30px, -50px) scale(1.1)" },
+                    "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
+                    "100%": { transform: "translate(0px, 0px) scale(1)" },
+                },
+                float: {
+                    '0%, 100%': { transform: 'translate(0, 0) rotate(0deg)' },
+                    '25%': { transform: 'translate(20px, -40px) rotate(5deg)' },
+                    '50%': { transform: 'translate(-10px, 15px) rotate(-3deg)' },
+                    '75%': { transform: 'translate(15px, 25px) rotate(2deg)' },
+                },
+                fadeInUp: {
+                    '0%': { opacity: '0', transform: 'translateY(30px)' },
+                    '100%': { opacity: '1', transform: 'translateY(0)' },
+                },
+                fadeIn: {
+                    '0%': { opacity: '0' },
+                    '100%': { opacity: '1' },
+                },
+                shimmer: {
+                    '0%': { backgroundPosition: '-200% 0' },
+                    '100%': { backgroundPosition: '200% 0' },
+                }
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(50px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 
+                0 4px 6px -1px rgba(0, 0, 0, 0.05),
+                0 10px 15px -3px rgba(0, 0, 0, 0.05),
+                inset 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+        .bg-medical-gradient {
+            background: radial-gradient(circle at top left, #f7f9fb 0%, #e6e8ea 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .shimmer-text {
+            background: linear-gradient(90deg, #004ac6 0%, #3e3fcc 40%, #004ac6 60%, #004ac6 100%);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: shimmer 5s linear infinite;
+        }
+        .animate-delay-100 { animation-delay: 100ms; }
+        .animate-delay-200 { animation-delay: 200ms; }
+        .animate-delay-300 { animation-delay: 300ms; }
+        .animate-delay-400 { animation-delay: 400ms; }
+        .animate-delay-500 { animation-delay: 500ms; }
+        .animate-delay-600 { animation-delay: 600ms; }
+
+        .float-item {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0.15;
+            filter: blur(2px);
+        }
+    </style>
+</head>
+<body class="bg-medical-gradient min-h-screen flex items-center justify-center p-6 font-body text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Dynamic Background Layer -->
+<div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+<!-- Moving Organic Blobs -->
+<div class="absolute top-0 -left-20 w-[500px] h-[500px] bg-primary/15 rounded-full mix-blend-multiply filter blur-[100px] animate-blob"></div>
+<div class="absolute top-1/4 -right-20 w-[600px] h-[600px] bg-secondary/10 rounded-full mix-blend-multiply filter blur-[120px] animate-blob animation-delay-2000"></div>
+<div class="absolute -bottom-40 left-1/4 w-[550px] h-[550px] bg-tertiary/15 rounded-full mix-blend-multiply filter blur-[110px] animate-blob animation-delay-4000"></div>
+<!-- Floating 3D-like Medical Elements -->
+<div class="float-item top-20 left-[10%] animate-float animate-delay-100">
+<span class="material-symbols-outlined text-[120px] text-primary/30">favorite</span>
+</div>
+<div class="float-item bottom-40 right-[15%] animate-float animate-delay-300" style="animation-duration: 20s;">
+<span class="material-symbols-outlined text-[160px] text-secondary/30">emergency</span>
+</div>
+<div class="float-item top-1/2 left-[5%] animate-float animate-delay-500" style="animation-duration: 18s;">
+<span class="material-symbols-outlined text-[80px] text-tertiary/30">pill</span>
+</div>
+<div class="float-item top-[10%] right-[25%] animate-float animate-delay-200" style="animation-duration: 25s;">
+<span class="material-symbols-outlined text-[100px] text-primary/20">stethoscope</span>
+</div>
+<!-- Noise & Grid -->
+<div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.04] contrast-150"></div>
+<img class="absolute inset-0 w-full h-full object-cover opacity-[0.03] mix-blend-overlay grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjdrmndM23_ogjW767zrLn9hhVbBPBIDUYaZ3BXvwaMZWkFVUuCIqXyRWAgwWDauGsmF8Dlt5WquY84lJ5vw9XACfMdVNOEIw94P8LFsmMAqDzzbUIu1I94H5oNeDfCSo0roP7kgPk0_2WAkQgH8kWMEeltc61FZQXVVO-pqsNf3j6B2k5MEIO_hDQgAlrxwiY8KvHydh-2L1f562p3E0eDJmo9jeDtVHl72r2VDR2m4jY3wvMq1KWQVeRYSar7qJkuie07rNJW_Q"/>
+</div>
+<!-- Login Container -->
+<main class="relative z-10 w-full max-w-lg">
+<div class="glass-panel p-8 md:p-12 rounded-[3rem] shadow-[0_40px_100px_-20px_rgba(0,74,198,0.12)] flex flex-col items-center border-white/60 animate-fade-in-up">
+<!-- Logo & Title -->
+<div class="flex flex-col items-center mb-10 opacity-0 animate-fade-in-up animate-delay-100">
+<div class="w-16 h-16 bg-primary-container rounded-2xl flex items-center justify-center mb-5 shadow-2xl shadow-primary/25 transition-all duration-700 hover:rotate-[10deg] hover:scale-110">
+<span class="material-symbols-outlined text-on-primary text-4xl" style="font-variation-settings: 'FILL' 1;">medical_services</span>
+</div>
+<h1 class="font-headline text-4xl font-black tracking-tight shimmer-text">MediQueue</h1>
+<p class="font-label text-on-surface-variant/70 mt-2 text-sm font-semibold tracking-wider uppercase">Clinical Portal Authorization</p>
+</div>
+<!-- Role Selector Tabs -->
+<div class="w-full grid grid-cols-2 p-1.5 bg-surface-container-high/40 rounded-2xl mb-8 opacity-0 animate-fade-in-up animate-delay-200">
+<button class="py-3 rounded-xl text-sm font-bold transition-all duration-500 bg-surface-container-lowest text-primary shadow-lg shadow-black/5 transform scale-[1.02]">
+                    Medical Staff
+                </button>
+<button class="py-3 rounded-xl text-sm font-semibold text-on-surface-variant hover:text-primary hover:bg-white/40 transition-all duration-300">
+                    Administrator
+                </button>
+</div>
+<!-- Form -->
+<form class="w-full space-y-6">
+<!-- Email Input -->
+<div class="space-y-2 opacity-0 animate-fade-in-up animate-delay-300">
+<label class="block text-[10px] font-black text-on-surface-variant/60 uppercase tracking-[0.2em] px-2" for="email">
+                        Institutional Email
+                    </label>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline group-focus-within:text-primary transition-colors text-xl">alternate_email</span>
+</div>
+<input class="w-full pl-14 pr-4 py-4.5 bg-white/40 border-2 border-transparent rounded-[1.25rem] text-on-surface placeholder:text-outline/40 focus:ring-4 focus:ring-primary/5 focus:border-primary/20 focus:bg-white transition-all duration-500 font-medium" id="email" placeholder="dr.smith@mediqueue.clinic" type="email"/>
+</div>
+</div>
+<!-- Password Input -->
+<div class="space-y-2 opacity-0 animate-fade-in-up animate-delay-400">
+<div class="flex justify-between items-center px-2">
+<label class="text-[10px] font-black text-on-surface-variant/60 uppercase tracking-[0.2em]" for="password">
+                            Secure Key
+                        </label>
+<a class="text-xs font-bold text-primary hover:underline underline-offset-4 decoration-2 transition-all" href="#">Forgot?</a>
+</div>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline group-focus-within:text-primary transition-colors text-xl">lock</span>
+</div>
+<input class="w-full pl-14 pr-14 py-4.5 bg-white/40 border-2 border-transparent rounded-[1.25rem] text-on-surface placeholder:text-outline/40 focus:ring-4 focus:ring-primary/5 focus:border-primary/20 focus:bg-white transition-all duration-500 font-medium" id="password" placeholder="••••••••" type="password"/>
+<div class="absolute inset-y-0 right-0 pr-4 flex items-center">
+<button class="w-10 h-10 flex items-center justify-center text-on-surface-variant/40 hover:text-primary hover:bg-primary/5 rounded-full transition-all" type="button">
+<span class="material-symbols-outlined text-xl">visibility</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Remember Me -->
+<div class="flex items-center space-x-3 px-2 py-1 opacity-0 animate-fade-in-up animate-delay-500">
+<input class="w-5 h-5 rounded-md border-outline-variant text-primary focus:ring-primary/20 focus:ring-offset-0 transition-all cursor-pointer bg-white/50" id="remember" type="checkbox"/>
+<label class="text-sm text-on-surface-variant font-semibold select-none cursor-pointer" for="remember">Stay signed in for this shift</label>
+</div>
+<!-- Submit Button -->
+<div class="opacity-0 animate-fade-in-up animate-delay-600">
+<button class="w-full py-5 bg-primary text-on-primary font-headline font-extrabold text-lg rounded-[1.25rem] shadow-2xl shadow-primary/30 hover:shadow-primary/50 hover:-translate-y-1 active:scale-95 transition-all duration-500 flex items-center justify-center gap-3 group relative overflow-hidden" type="submit">
+<span class="relative z-10">Sign In to Dashboard</span>
+<span class="material-symbols-outlined relative z-10 transition-transform group-hover:translate-x-2">arrow_forward</span>
+<!-- Gloss effect -->
+<div class="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+</button>
+</div>
+</form>
+<!-- Footer Links -->
+<div class="mt-12 w-full pt-8 border-t border-black/5 flex flex-col items-center gap-5 opacity-0 animate-fade-in animate-delay-600">
+<div class="flex items-center gap-8 text-sm font-bold text-on-surface-variant/60">
+<a class="hover:text-primary transition-colors decoration-primary/30 underline-offset-8" href="#">Request Access</a>
+<span class="w-1.5 h-1.5 rounded-full bg-outline-variant/30"></span>
+<a class="hover:text-primary transition-colors decoration-primary/30 underline-offset-8" href="#">Security Standards</a>
+</div>
+<div class="flex gap-4">
+<div class="flex items-center gap-2 px-4 py-1.5 bg-white/40 rounded-full border border-white/50 shadow-sm backdrop-blur-md">
+<div class="w-2 h-2 rounded-full bg-secondary animate-pulse shadow-[0_0_8px_rgba(0,106,97,0.5)]"></div>
+<span class="text-[10px] font-black text-on-surface-variant tracking-widest uppercase">JWT Secure</span>
+</div>
+<div class="flex items-center gap-2 px-4 py-1.5 bg-white/40 rounded-full border border-white/50 shadow-sm backdrop-blur-md">
+<span class="text-[10px] font-black text-on-surface-variant tracking-widest uppercase italic">Axios-Native</span>
+</div>
+</div>
+</div>
+</div>
+<!-- System Status Bar -->
+<div class="mt-10 flex justify-between items-center px-6 opacity-0 animate-fade-in animate-delay-600">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-secondary text-base" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-[11px] font-black text-on-surface-variant/50 uppercase tracking-[0.15em]">System Health: Optimal</span>
+</div>
+<p class="text-[11px] font-black text-on-surface-variant/40 tracking-[0.15em]">v2.4.0 Clinical Alpha</p>
+</div>
+</main>
+<!-- Floating UI Cues -->
+<div class="fixed bottom-10 right-10 hidden xl:flex flex-col items-end gap-4 pointer-events-none opacity-0 animate-fade-in animate-delay-600">
+<div class="px-6 py-5 glass-panel rounded-[2rem] border-white/60 shadow-2xl flex items-center gap-5 transform translate-y-0 hover:-translate-y-2 transition-transform duration-700 pointer-events-auto cursor-pointer group">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center shadow-inner group-hover:rotate-12 transition-transform">
+<span class="material-symbols-outlined text-on-secondary-container text-2xl">psychology</span>
+</div>
+<div>
+<p class="text-[10px] font-black text-secondary tracking-[0.2em] uppercase mb-1">Smart Routing</p>
+<p class="text-sm text-on-surface font-bold">Ready for Surgeon Dashboard...</p>
+</div>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MediQueue Receptionist Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#2f2ebe",
+                        "tertiary-fixed": "#e1e0ff",
+                        "surface-variant": "#e0e3e5",
+                        "tertiary": "#3e3fcc",
+                        "primary": "#004ac6",
+                        "surface-container-high": "#e6e8ea",
+                        "on-primary-container": "#eeefff",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed": "#89f5e7",
+                        "on-secondary-container": "#006f66",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#86f2e4",
+                        "tertiary-container": "#585be6",
+                        "on-secondary-fixed-variant": "#005049",
+                        "inverse-on-surface": "#eff1f3",
+                        "surface": "#f7f9fb",
+                        "surface-container-low": "#f2f4f6",
+                        "inverse-primary": "#b4c5ff",
+                        "background": "#f7f9fb",
+                        "inverse-surface": "#2d3133",
+                        "secondary": "#006a61",
+                        "tertiary-fixed-dim": "#c0c1ff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed": "#00201d",
+                        "on-tertiary-fixed": "#07006c",
+                        "outline": "#737686",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed": "#00174b",
+                        "surface-container": "#eceef0",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "secondary-fixed-dim": "#6bd8cb",
+                        "surface-bright": "#f7f9fb",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#c3c6d7",
+                        "primary-fixed": "#dbe1ff",
+                        "surface-dim": "#d8dadc",
+                        "on-background": "#191c1e",
+                        "on-surface": "#191c1e",
+                        "on-tertiary-container": "#f1eeff",
+                        "surface-tint": "#0053db",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-surface-variant": "#434655",
+                        "primary-container": "#2563eb",
+                        "on-tertiary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Manrope', sans-serif; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(224, 227, 229, 0.2);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- SideNavBar (Authority: JSON) -->
+<aside class="h-screen w-64 fixed left-0 top-0 overflow-y-auto bg-slate-50 dark:bg-slate-950 flex flex-col border-r border-slate-100 dark:border-slate-800 z-50">
+<div class="p-6">
+<div class="flex items-center gap-3 mb-8">
+<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">medical_services</span>
+</div>
+<div>
+<h1 class="text-lg font-black text-blue-700 dark:text-blue-400 leading-tight">MediQueue</h1>
+<p class="text-xs font-medium text-slate-500 uppercase tracking-wider">Clinical Portal</p>
+</div>
+</div>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-blue-700 dark:text-blue-400 font-bold border-r-4 border-blue-600 bg-slate-100 dark:bg-slate-900 transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-xs font-medium Inter">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-xs font-medium Inter">Patient Queue</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors" href="#">
+<span class="material-symbols-outlined">event_note</span>
+<span class="text-xs font-medium Inter">Appointments</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="text-xs font-medium Inter">Medical Records</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="text-xs font-medium Inter">Analytics</span>
+</a>
+</nav>
+<div class="mt-8">
+<button class="w-full py-3 bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-xl font-semibold text-sm flex items-center justify-center gap-2 shadow-lg shadow-primary/20 hover:scale-95 duration-200">
+<span class="material-symbols-outlined">add</span>
+                    New Check-in
+                </button>
+</div>
+</div>
+<div class="mt-auto p-6 border-t border-slate-100 dark:border-slate-800 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors" href="#">
+<span class="material-symbols-outlined">support_agent</span>
+<span class="text-xs font-medium Inter">Support</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-xs font-medium Inter">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 min-h-screen">
+<!-- TopNavBar (Authority: JSON) -->
+<header class="sticky top-0 z-40 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-xl flex justify-between items-center px-8 py-3 w-full">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative max-w-md w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-high border-none rounded-full text-sm focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Search patients or records..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<button class="p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-full transition-all duration-300">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-full transition-all duration-300">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-full transition-all duration-300">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+<div class="h-8 w-px bg-slate-200"></div>
+<div class="flex items-center gap-3">
+<div class="text-right">
+<p class="text-xs font-bold text-on-surface">Sarah Miller</p>
+<p class="text-[10px] text-on-surface-variant font-medium">Head Receptionist</p>
+</div>
+<img alt="User profile avatar" class="w-10 h-10 rounded-full object-cover border-2 border-primary-fixed" data-alt="Professional headshot of a female healthcare receptionist in a clean white uniform with a friendly expression and glasses" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwRepa12nbTtaZQ3Y3UEGmkTFiRyiepJLcL3c9HEnBHYkcvofgGS80gmQd0GgSEJArV69s83xnLNz5DHC449SuZjqtOXv-EI8lz9yvdBi05QyFEzcWkYXOhtjoHTz6h2zpHX0U4kMH3phJQ6hVOL69RhgGqr8Yg9iGGcEOMHEfO3mRScZBZRR5SHz0bgroNfJgMahoZZJdnNV9BcNED3q5paDFtQTSHXEY7uaV3BxxwG6cBye-73aF897WPJVGc88a8XXToAesRkg"/>
+</div>
+</div>
+</header>
+<div class="p-8 space-y-8">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="text-3xl font-extrabold tracking-tight text-on-surface">Receptionist Dashboard</h2>
+<p class="text-on-surface-variant mt-1">St. Jude Medical Center | Terminal 04</p>
+</div>
+<div class="flex gap-3">
+<div class="bg-secondary-container px-4 py-2 rounded-xl flex items-center gap-3">
+<div class="w-2 h-2 bg-secondary rounded-full animate-pulse"></div>
+<span class="text-sm font-semibold text-on-secondary-container">Live System Active</span>
+</div>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Left Column: Registration & Scan -->
+<div class="col-span-12 lg:col-span-4 space-y-6">
+<!-- QR Scanner Card -->
+<div class="bg-surface-container-lowest p-6 rounded-3xl shadow-[0_32px_64px_rgba(25,28,30,0.04)] border border-outline-variant/10">
+<div class="flex items-center justify-between mb-6">
+<h3 class="headline-sm font-bold text-on-surface">Digital Check-in</h3>
+<span class="material-symbols-outlined text-primary">qr_code_scanner</span>
+</div>
+<div class="space-y-4">
+<label class="block text-xs font-bold text-on-surface-variant uppercase tracking-widest">Awaiting Scanner Input</label>
+<div class="relative group">
+<div class="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-2xl blur opacity-20 group-focus-within:opacity-40 transition duration-500"></div>
+<input autofocus="" class="relative w-full bg-surface-container-high border-2 border-transparent focus:border-primary/20 focus:bg-surface-container-lowest focus:ring-0 rounded-2xl py-4 px-4 text-center font-mono text-primary placeholder:text-slate-400 transition-all cursor-pointer" placeholder="Scanning Patient QR..." type="text"/>
+</div>
+<p class="text-[11px] text-center text-slate-400">Place the patient's mobile QR code within 10cm of the sensor.</p>
+</div>
+</div>
+<!-- Quick Registration Form -->
+<div class="bg-surface-container-lowest p-6 rounded-3xl shadow-[0_32px_64px_rgba(25,28,30,0.04)] border border-outline-variant/10">
+<h3 class="headline-sm font-bold text-on-surface mb-6">Quick Registration</h3>
+<form class="space-y-4">
+<div>
+<label class="text-[11px] font-bold text-on-surface-variant uppercase ml-1">Full Name</label>
+<input class="w-full mt-1 bg-surface-container-high border-none rounded-xl py-3 px-4 focus:ring-2 focus:ring-primary/20 text-sm" placeholder="John Doe" type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="text-[11px] font-bold text-on-surface-variant uppercase ml-1">Gender</label>
+<select class="w-full mt-1 bg-surface-container-high border-none rounded-xl py-3 px-4 focus:ring-2 focus:ring-primary/20 text-sm appearance-none">
+<option>Male</option>
+<option>Female</option>
+<option>Other</option>
+</select>
+</div>
+<div>
+<label class="text-[11px] font-bold text-on-surface-variant uppercase ml-1">Birth Date</label>
+<input class="w-full mt-1 bg-surface-container-high border-none rounded-xl py-3 px-4 focus:ring-2 focus:ring-primary/20 text-sm" type="date"/>
+</div>
+</div>
+<div>
+<label class="text-[11px] font-bold text-on-surface-variant uppercase ml-1">Reason for Visit</label>
+<select class="w-full mt-1 bg-surface-container-high border-none rounded-xl py-3 px-4 focus:ring-2 focus:ring-primary/20 text-sm appearance-none">
+<option>General Consultation</option>
+<option>Emergency Care</option>
+<option>Diagnostic Tests</option>
+<option>Follow-up Visit</option>
+</select>
+</div>
+<button class="w-full py-4 bg-primary text-on-primary rounded-2xl font-bold text-sm shadow-xl shadow-primary/20 hover:scale-[0.98] transition-transform" type="submit">
+                                Register &amp; Queue
+                            </button>
+</form>
+</div>
+</div>
+<!-- Center Column: Queue Management -->
+<div class="col-span-12 lg:col-span-5 space-y-6">
+<div class="bg-surface-container-lowest p-6 rounded-3xl shadow-[0_32px_64px_rgba(25,28,30,0.04)] border border-outline-variant/10 h-full flex flex-col">
+<div class="flex items-center justify-between mb-6">
+<div>
+<h3 class="headline-sm font-bold text-on-surface">Queue Management</h3>
+<p class="text-xs text-on-surface-variant">Drag to reprioritize urgent cases</p>
+</div>
+<span class="text-xs font-bold bg-primary-fixed text-on-primary-fixed px-3 py-1 rounded-full">12 Waiting</span>
+</div>
+<div class="space-y-3 flex-1 overflow-y-auto no-scrollbar pr-1">
+<!-- Queue Items -->
+<div class="group flex items-center gap-4 p-4 bg-surface rounded-2xl border border-transparent hover:border-primary/20 transition-all cursor-grab active:cursor-grabbing">
+<span class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors">drag_indicator</span>
+<div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center font-bold text-blue-700">A1</div>
+<div class="flex-1">
+<h4 class="text-sm font-bold text-on-surface">James Harrison</h4>
+<p class="text-[11px] text-on-surface-variant">Consultation • Dr. Aris</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-bold text-on-surface-variant">12 min</span>
+<span class="material-symbols-outlined text-secondary text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<div class="group flex items-center gap-4 p-4 bg-surface rounded-2xl border border-transparent hover:border-primary/20 transition-all cursor-grab active:cursor-grabbing">
+<span class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors">drag_indicator</span>
+<div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center font-bold text-blue-700">A2</div>
+<div class="flex-1">
+<h4 class="text-sm font-bold text-on-surface">Elara Vance</h4>
+<p class="text-[11px] text-on-surface-variant">Vitals Check • Nurse Mary</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-bold text-on-surface-variant">8 min</span>
+<span class="material-symbols-outlined text-amber-500 text-lg" style="font-variation-settings: 'FILL' 1;">priority_high</span>
+</div>
+</div>
+<div class="group flex items-center gap-4 p-4 bg-surface rounded-2xl border border-transparent hover:border-primary/20 transition-all cursor-grab active:cursor-grabbing">
+<span class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors">drag_indicator</span>
+<div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center font-bold text-blue-700">A3</div>
+<div class="flex-1">
+<h4 class="text-sm font-bold text-on-surface">Robert Chen</h4>
+<p class="text-[11px] text-on-surface-variant">Follow-up • Dr. Aris</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-bold text-on-surface-variant">5 min</span>
+<div class="w-2 h-2 rounded-full bg-slate-300"></div>
+</div>
+</div>
+<div class="group flex items-center gap-4 p-4 bg-surface rounded-2xl border border-transparent hover:border-primary/20 transition-all cursor-grab active:cursor-grabbing">
+<span class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors">drag_indicator</span>
+<div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center font-bold text-blue-700">B1</div>
+<div class="flex-1">
+<h4 class="text-sm font-bold text-on-surface">Sarah Connor</h4>
+<p class="text-[11px] text-on-surface-variant">X-Ray • Imaging Dept</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-bold text-on-surface-variant">Just Now</span>
+<div class="w-2 h-2 rounded-full bg-slate-300"></div>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-6 border-t border-surface-container">
+<button class="w-full py-3 bg-surface-container-high text-primary rounded-xl font-bold text-xs hover:bg-surface-container-highest transition-colors">
+                                View Full Detailed Queue
+                            </button>
+</div>
+</div>
+</div>
+<!-- Right Column: Activity & Announcements -->
+<div class="col-span-12 lg:col-span-3 space-y-6">
+<!-- Announcement Center -->
+<div class="bg-surface-container-lowest p-6 rounded-3xl shadow-[0_32px_64px_rgba(25,28,30,0.04)] border border-outline-variant/10">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-tertiary">campaign</span>
+<h3 class="text-sm font-bold text-on-surface">Announcement Center</h3>
+</div>
+<textarea class="w-full h-32 bg-surface-container-high border-none rounded-2xl p-4 text-xs resize-none focus:ring-2 focus:ring-tertiary/20 placeholder:text-slate-400" placeholder="Write a broadcast message..."></textarea>
+<button class="w-full mt-4 py-3 bg-tertiary text-on-tertiary rounded-xl font-bold text-xs flex items-center justify-center gap-2 shadow-lg shadow-tertiary/20 hover:scale-[0.98] transition-all">
+<span class="material-symbols-outlined text-sm">send</span>
+                            Broadcast to All
+                        </button>
+</div>
+<!-- Live Activity Feed -->
+<div class="bg-surface-container-lowest p-6 rounded-3xl shadow-[0_32px_64px_rgba(25,28,30,0.04)] border border-outline-variant/10">
+<h3 class="text-sm font-bold text-on-surface mb-6">Live Activity</h3>
+<div class="space-y-6 relative">
+<!-- Connection Line -->
+<div class="absolute left-4 top-2 bottom-2 w-1 bg-surface-container-highest rounded-full"></div>
+<div class="relative flex items-start gap-4 pl-1">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-secondary text-sm">person_add</span>
+</div>
+<div class="flex-1">
+<p class="text-xs font-semibold text-on-surface">New Check-in</p>
+<p class="text-[10px] text-on-surface-variant">James Harrison registered</p>
+<p class="text-[9px] text-slate-400 mt-1">2 mins ago</p>
+</div>
+</div>
+<div class="relative flex items-start gap-4 pl-1">
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-primary text-sm">medical_information</span>
+</div>
+<div class="flex-1">
+<p class="text-xs font-semibold text-on-surface">Vitals Recorded</p>
+<p class="text-[10px] text-on-surface-variant">Patient A2 vits by Nurse Mary</p>
+<p class="text-[9px] text-slate-400 mt-1">15 mins ago</p>
+</div>
+</div>
+<div class="relative flex items-start gap-4 pl-1">
+<div class="w-8 h-8 rounded-full bg-tertiary-fixed flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-tertiary text-sm">notifications_active</span>
+</div>
+<div class="flex-1">
+<p class="text-xs font-semibold text-on-surface">Broadcast Sent</p>
+<p class="text-[10px] text-on-surface-variant">"Dr. Smith delayed 10m"</p>
+<p class="text-[9px] text-slate-400 mt-1">1 hour ago</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Stats Bar -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="bg-surface-container-low p-6 rounded-3xl flex items-center gap-4">
+<div class="w-12 h-12 rounded-2xl bg-white flex items-center justify-center text-primary shadow-sm">
+<span class="material-symbols-outlined">schedule</span>
+</div>
+<div>
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">Avg Wait Time</p>
+<h4 class="text-xl font-extrabold text-on-surface">18 min</h4>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-3xl flex items-center gap-4">
+<div class="w-12 h-12 rounded-2xl bg-white flex items-center justify-center text-secondary shadow-sm">
+<span class="material-symbols-outlined">group</span>
+</div>
+<div>
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">Total Served</p>
+<h4 class="text-xl font-extrabold text-on-surface">42</h4>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-3xl flex items-center gap-4">
+<div class="w-12 h-12 rounded-2xl bg-white flex items-center justify-center text-tertiary shadow-sm">
+<span class="material-symbols-outlined">emergency</span>
+</div>
+<div>
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">Urgent Cases</p>
+<h4 class="text-xl font-extrabold text-on-surface">03</h4>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-3xl flex items-center gap-4">
+<div class="w-12 h-12 rounded-2xl bg-white flex items-center justify-center text-amber-500 shadow-sm">
+<span class="material-symbols-outlined">star</span>
+</div>
+<div>
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">Sat Score</p>
+<h4 class="text-xl font-extrabold text-on-surface">4.8/5</h4>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Contextual FAB (Authority: Logic) -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-primary text-on-primary rounded-2xl shadow-2xl shadow-primary/40 flex items-center justify-center hover:scale-110 transition-transform z-50">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+</button>
+</body></html>
