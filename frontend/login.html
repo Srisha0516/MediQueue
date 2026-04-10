@@ -204,4 +204,48 @@
 </div>
 </div>
 </div>
+    <script src="assets/js/api.js"></script>
+    <script>
+        const loginForm = document.querySelector('form');
+        const roleButtons = document.querySelectorAll('.grid button');
+        let selectedRole = 'doctor';
+
+        roleButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                roleButtons.forEach(b => b.classList.remove('bg-surface-container-lowest', 'text-primary', 'shadow-sm'));
+                btn.classList.add('bg-surface-container-lowest', 'text-primary', 'shadow-sm');
+                selectedRole = btn.textContent.trim().toLowerCase().includes('staff') ? 'doctor' : 'receptionist';
+            });
+        });
+
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const btn = loginForm.querySelector('button[type="submit"]');
+            
+            btn.innerHTML = 'Signing In... <span class="material-symbols-outlined animate-spin">refresh</span>';
+            btn.disabled = true;
+
+            try {
+                const res = await api.post('/auth/login', { email, password });
+                if (res.error) {
+                    alert(res.error);
+                } else {
+                    storage.setToken(res.accessToken);
+                    storage.setUser(res.user);
+                    
+                    if (res.user.role === 'doctor') window.location.href = 'doctor.html';
+                    else if (res.user.role === 'receptionist') window.location.href = 'receptionist.html';
+                    else window.location.href = 'patient.html';
+                }
+            } catch (err) {
+                alert('Connection failed. Error: ' + err.message);
+            } finally {
+                btn.innerHTML = 'Sign In <span class="material-symbols-outlined">arrow_forward</span>';
+                btn.disabled = false;
+            }
+        });
+    </script>
 </body></html>
