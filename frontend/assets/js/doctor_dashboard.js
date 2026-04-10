@@ -35,8 +35,8 @@ const fetchQueue = async () => {
     const currentTokenEl = document.querySelector('.text-4xl.font-black');
     
     if (inConsultation) {
-        if(currentNameEl) currentNameEl.textContent = inConsultation.appointment.patient.name;
-        if(currentTokenEl) currentTokenEl.textContent = '#' + String(inConsultation.token_number).padStart(3, '0');
+        if(currentNameEl) currentNameEl.textContent = inConsultation.patientName;
+        if(currentTokenEl) currentTokenEl.textContent = '#' + String(inConsultation.tokenNumber).padStart(3, '0');
     } else {
         if(currentNameEl) currentNameEl.textContent = "No Active Patient";
         if(currentTokenEl) currentTokenEl.textContent = "---";
@@ -49,13 +49,13 @@ const fetchQueue = async () => {
         <div class="bg-surface-container-lowest p-5 rounded-xl flex flex-col md:flex-row md:items-center justify-between gap-4 ${isCurrent ? 'border-2 border-primary/20 shadow-sm' : 'hover:bg-surface-container-low transition-colors group'}">
             <div class="flex items-center gap-5">
                 <div class="w-14 h-14 rounded-full ${isCurrent ? 'bg-primary-fixed text-primary' : 'bg-surface-container-high text-on-surface-variant'} flex items-center justify-center font-black text-xl font-headline">
-                    ${q.token_number}
+                    ${q.tokenNumber}
                 </div>
                 <div>
-                    <h4 class="text-lg font-bold text-on-surface leading-tight">${q.appointment.patient.name}</h4>
+                    <h4 class="text-lg font-bold text-on-surface leading-tight">${q.patientName}</h4>
                     <div class="flex items-center gap-3 mt-1">
                         <span class="text-xs font-medium text-on-surface-variant flex items-center gap-1">
-                            <span class="material-symbols-outlined text-xs">vaccines</span> ${q.appointment.symptoms || 'General Checkup'}
+                            <span class="material-symbols-outlined text-xs">vaccines</span> General Checkup
                         </span>
                         <span class="px-3 py-1 rounded-full ${isCurrent ? 'bg-secondary-container text-on-secondary-container' : 'bg-primary-fixed text-on-primary-fixed'} text-[10px] font-black uppercase tracking-wider">${q.status.replace('_', ' ')}</span>
                     </div>
@@ -63,12 +63,12 @@ const fetchQueue = async () => {
             </div>
             <div class="flex items-center gap-3">
                 ${isCurrent 
-                    ? `<button onclick="completePatient('${q.id}')" class="flex-1 md:flex-none px-6 py-3 rounded-xl bg-surface-container-highest text-on-surface font-bold text-sm hover:bg-surface-container-high transition-all">Mark as Done</button>`
-                    : `<button onclick="startPatient('${q.id}')" class="flex-1 md:flex-none px-6 py-3 rounded-xl bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold text-sm shadow-md shadow-primary/20 hover:scale-[1.02] transition-all">Start Consultation</button>`
+                    ? `<button onclick="completePatient('${q.queueEntryId}')" class="flex-1 md:flex-none px-6 py-3 rounded-xl bg-surface-container-highest text-on-surface font-bold text-sm hover:bg-surface-container-high transition-all">Mark as Done</button>`
+                    : `<button onclick="startPatient('${q.queueEntryId}')" class="flex-1 md:flex-none px-6 py-3 rounded-xl bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold text-sm shadow-md shadow-primary/20 hover:scale-[1.02] transition-all">Start Consultation</button>`
                 }
             </div>
         </div>`;
-    }).join('') || '<p>No patients in queue today.</p>';
+    }).join('') || '<p class="text-on-surface-variant font-medium">No patients in queue today.</p>';
 };
 
 window.startPatient = async (id) => {
